@@ -4,12 +4,25 @@
     <option name="linkedExternalProjectsSettings">
       <GradleProjectSettings>
         <option name="delegatedBuild" value="false" />
+        <option name="testRunner" value="GRADLE" />
         <option name="distributionType" value="WRAPPED" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/Cinema Room Manager/task" />
+            <option value="$PROJECT_DIR$/Topics/For loop and arrays/Check the numbers" />
+            <option value="$PROJECT_DIR$/Topics/For loop and arrays/Counting" />
+            <option value="$PROJECT_DIR$/Topics/For loop and arrays/Cyclically shifting elements" />
+            <option value="$PROJECT_DIR$/Topics/For loop and arrays/Down to" />
+            <option value="$PROJECT_DIR$/Topics/For loop and arrays/Find the max" />
+            <option value="$PROJECT_DIR$/Topics/For loop and arrays/Is it here" />
+            <option value="$PROJECT_DIR$/Topics/For loop and arrays/Iteration" />
+            <option value="$PROJECT_DIR$/Topics/For loop and arrays/Just checking" />
+            <option value="$PROJECT_DIR$/Topics/For loop and arrays/Step" />
+            <option value="$PROJECT_DIR$/Topics/For loop and arrays/Sum of numbers" />
+            <option value="$PROJECT_DIR$/Topics/For loop and arrays/Theory" />
+            <option value="$PROJECT_DIR$/Topics/For loop and arrays/Triples" />
             <option value="$PROJECT_DIR$/util" />
           </set>
         </option>
