@@ -51,19 +51,25 @@ fun payback() {
 
 
 fun printCinema() {
-    val numbers = "1 2 3 4 5 6 7 8 "
-    val chars = "S S S S S S S S "
+    val seats = mutableListOf<String>()
 
-    println("Cinema:")
+    println("Cinema:\n")
 
     for (a in 0..ROWS) {
-        println(
-            if (a == 0) {
-                "  $numbers"
-            } else {
-                "$a $chars"
+        if (a == 0) {
+            for (i in 0..SEATS) {
+                if (i == 0) seats.add(" ") else seats.add(i.toString())
             }
-        )
+            println(seats.joinToString(" "))
+            seats.clear()
+        } else {
+            seats.add("$a")
+            for (i in 1..SEATS) {
+                seats.add("S")
+            }
+            println(seats.joinToString(" "))
+            seats.clear()
+        }
     }
 }
 
