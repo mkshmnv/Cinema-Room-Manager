@@ -68,22 +68,42 @@ fun printCinema() {
 }
 
 fun printTicket() {
-    var price = 0
+    val seats = mutableListOf<String>()
 
-    val numbers = "  1 2 3 4 5 6 7 8"
-    val seats = mutableListOf<String>() //mutableListOf("1", "S", "S", "S", "S", "S", "S", "S", "S")
+    println("Cinema:\n")
 
-    println("Cinema:\n$numbers")
-
-    for (a in 1..ROWS) {
-        seats.add("$a")
-        for (i in 1..SEATS) {
-            seats.add("S")
+    for (a in 0..ROWS) {
+        if (a == 0) {
+            for (i in 0..SEATS) {
+                if (i == 0) seats.add(" ") else seats.add(i.toString())
+            }
+            println(seats.joinToString(" "))
+            seats.clear()
+        } else {
+            seats.add("$a")
+            for (i in 1..SEATS) {
+                seats.add("S")
+            }
+            if (a == ROW_NUMBER) seats[SEAT_NUMBER] = "B"
+            println(seats.joinToString(" "))
+            seats.clear()
         }
-        if (a == ROW_NUMBER) seats[SEAT_NUMBER] = "B"
-        println(seats.joinToString(" "))
-        seats.clear()
     }
+    println("\nTicket price: $${priceTicket()}")
+}
 
-    println("\nTicket price: $$price")
+fun priceTicket() : Int {
+    val totalSeats = ROWS * SEATS
+    val firstHalf = 1..ROWS / 2
+
+    return when {
+        // Calculate - price of each ticket is 10 dollars
+        (totalSeats < 60) -> 10
+
+        // Calculate - price 10 to front half of the rows and 8 dollars for the back half
+        (totalSeats > 60) -> if (ROW_NUMBER in firstHalf) 10 else 8
+
+        // Check any errors
+        else -> throw Exception("Error")
+    }
 }
