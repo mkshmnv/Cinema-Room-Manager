@@ -2,13 +2,13 @@ package cinema
 
 var ROWS = 0
 var SEATS = 0
+var ROW_NUMBER = 0
+var SEAT_NUMBER = 0
+
 fun main() {
     sizeCinema()
-    cinema()
     choseTicket()
-    ticket()
-
-    //    payback()
+//    payback()
 }
 
 fun sizeCinema() {
@@ -16,16 +16,18 @@ fun sizeCinema() {
     ROWS = readln().toInt()
     println("Enter the number of seats in each row:")
     SEATS = readln().toInt()
+    println(" ")
+    printCinema()
 }
 
 fun choseTicket() {
-    println("Enter a row number:")
-    ROWS = readln().toInt()
+    println("\nEnter a row number:")
+    ROW_NUMBER = readln().toInt()
     println("Enter a seat number in that row:")
-    SEATS = readln().toInt()
+    SEAT_NUMBER = readln().toInt()
+    printTicket()
 }
 
-// Stage 2/5
 fun payback() {
     val totalSeats = ROWS * SEATS
 
@@ -44,18 +46,17 @@ fun payback() {
         else -> throw Exception("Error")
     }
 
-    println("Total income: \n$$profit")
+    println("\nTotal income: $$profit\n")
 }
 
 
-// Stage 1/5
-fun cinema() {
+fun printCinema() {
     val numbers = "1 2 3 4 5 6 7 8 "
     val chars = "S S S S S S S S "
 
     println("Cinema:")
 
-    for (a in 0..7) {
+    for (a in 0..ROWS) {
         println(
             if (a == 0) {
                 "  $numbers"
@@ -66,23 +67,23 @@ fun cinema() {
     }
 }
 
-fun ticket() {
+fun printTicket() {
     var price = 0
 
-    val numbers = "1 2 3 4 5 6 7 8 "
-    val chars = "S S S S S S S S "
+    val numbers = "  1 2 3 4 5 6 7 8"
+    val seats = mutableListOf<String>() //mutableListOf("1", "S", "S", "S", "S", "S", "S", "S", "S")
 
-    println("Cinema:")
+    println("Cinema:\n$numbers")
 
-    for (a in 0..7) {
-        println(
-            if (a == 0) {
-                "  $numbers"
-            } else {
-
-                "$a $chars"
-            }
-        )
+    for (a in 1..ROWS) {
+        seats.add("$a")
+        for (i in 1..SEATS) {
+            seats.add("S")
+        }
+        if (a == ROW_NUMBER) seats[SEAT_NUMBER] = "B"
+        println(seats.joinToString(" "))
+        seats.clear()
     }
-    println("Ticket price: $$price")
+
+    println("\nTicket price: $$price")
 }
