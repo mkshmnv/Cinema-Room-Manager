@@ -6,6 +6,7 @@ var SEATS = 0
 var ROW_NUMBER = 0
 var SEAT_NUMBER = 0
 var ALL_TICKETS = mutableMapOf<Int, Int>()
+var SUM_PURCHASED_TICKETS = 0
 
 fun main() {
     sizeCinema()
@@ -55,8 +56,7 @@ fun printCinema() {
 fun priceTicket() : Int {
     val totalSeats = ROWS * SEATS
     val firstHalf = 1..ROWS / 2
-
-    return when {
+    val price = when {
         // Calculate - price of each ticket is 10 dollars
         (totalSeats in 1..60) -> 10
 
@@ -66,10 +66,12 @@ fun priceTicket() : Int {
         // Check any errors
         else -> throw Exception("Error")
     }
+    SUM_PURCHASED_TICKETS += price
+    return price
 }
 
 fun menu() {
-    println("\n1. Show the seats\n2. Buy a ticket\n0. Exit")
+    println("\n1. Show the seats\n2. Buy a ticket\n3. Statistics\n0. Exit")
     MENU_CHOICE = readln().toInt()
     when (MENU_CHOICE) {
         1 -> printCinema()
@@ -79,6 +81,10 @@ fun menu() {
             println("Ticket price: $${priceTicket()}")
             menu()
         }
+        3 -> {
+            statistics()
+            menu()
+        }
         // Exit from program and clear all
         0 -> {
             MENU_CHOICE = 0
@@ -86,6 +92,38 @@ fun menu() {
             SEATS = 0
             ROW_NUMBER = 0
             SEAT_NUMBER = 0
+            ALL_TICKETS.clear()
         }
+    }
+}
+
+fun statistics() {
+    println("\nNumber of purchased tickets: ${ALL_TICKETS.size}")
+    println("Percentage: ${percentage()}%")
+    println("Current income: $SUM_PURCHASED_TICKETS")
+    println("Total income: ${income()}")
+}
+
+fun percentage(): Double {
+    TODO()
+}
+
+fun income() : Int {
+    val totalSeats = ROWS * SEATS
+
+
+    return when {
+        // Calculate - price of each ticket is 10 dollars
+        (totalSeats < 60) -> totalSeats * 10
+
+        // Calculate - price front half of the rows and 8 dollars for the back half
+        (totalSeats > 60) -> {
+            val firstHalf = ROWS / 2 * SEATS
+            val secondHalf = if (ROWS % 2 == 0) ROWS / 2 * SEATS else (ROWS / 2 + 1) * SEATS
+            firstHalf * 10 + secondHalf * 8
+        }
+
+        // Check any errors
+        else -> throw Exception("Error")
     }
 }
